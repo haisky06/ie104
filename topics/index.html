@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Khám phá các chủ đề nghiên cứu khoa học thuộc ba hướng An toàn thông tin, Dữ liệu và dự báo, AI ngôn ngữ tại UIT.">
+  <title>Khám phá chủ đề nghiên cứu | Định hướng NCKH IE104</title>
+  <link rel="stylesheet" href="../assets/css/reset.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/topics.css">
+</head>
+
+<body id="page-topics">
+  <!-- Header dùng chung cho toàn bộ các trang Job 1 -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <div class="site-header__brand">
+        <p class="site-header__title">Định hướng Nghiên cứu Khoa học</p>
+      </div>
+      <nav class="site-nav" aria-label="Điều hướng chính">
+        <ul class="site-nav__list">
+          <li class="site-nav__item">
+            <a class="site-nav__link" href="./index.html" aria-current="page">Khám phá</a>
+          </li>
+          <li class="site-nav__item">
+            <a class="site-nav__link" href="../lecturers/index.html">Giảng viên</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Nội dung chính của trang Khám phá chủ đề -->
+  <main class="topics-main">
+    <div class="container">
+      <!-- Giới thiệu trang ngắn gọn một câu hữu ích cho sinh viên -->
+      <section class="topics-hero" aria-labelledby="topics-page-title">
+        <h1 id="topics-page-title" class="topics-hero__title">Khám phá chủ đề nghiên cứu khoa học</h1>
+        <p class="topics-hero__desc">
+          Tra cứu đề tài thuộc ba hướng An toàn thông tin, Dữ liệu &amp; dự báo và AI ngôn ngữ để xem lộ trình kiến thức nền cùng giảng viên hướng dẫn.
+        </p>
+      </section>
+
+      <!-- Cụm tìm kiếm và lọc nhóm gọn phía trên kết quả (Trạng thái tĩnh ở Job 1) -->
+      <section class="topics-filter" aria-label="Tìm kiếm và lọc đề tài">
+        <form class="topics-filter__form" action="#" method="get">
+          <div class="topics-filter__field topics-filter__field--search">
+            <label class="topics-filter__label" for="topic-search">Từ khóa tên đề tài hoặc giảng viên</label>
+            <input class="topics-filter__input" type="search" id="topic-search" name="q"
+              placeholder="Ví dụ: Phát hiện tấn công mạng, học sâu..." disabled aria-describedby="topics-filter-note">
+          </div>
+          <div class="topics-filter__field topics-filter__field--group">
+            <label class="topics-filter__label" for="topic-group">Nhóm hướng nghiên cứu</label>
+            <select class="topics-filter__select" id="topic-group" name="group" disabled
+              aria-describedby="topics-filter-note">
+              <option value="all">Tất cả nhóm nghiên cứu (3 nhóm)</option>
+              <option value="sec">An toàn thông tin</option>
+              <option value="data">Dữ liệu &amp; dự báo</option>
+              <option value="nlp">AI ngôn ngữ</option>
+            </select>
+          </div>
+        </form>
+        <p id="topics-filter-note" class="topics-filter__note">
+          Chức năng sẽ bổ sung ở chặng JavaScript
+        </p>
+      </section>
+
+      <!-- Danh sách thẻ đề tài nghiên cứu (Mốc A: 1 thẻ mẫu IDS) -->
+      <section class="topics-results" aria-labelledby="topics-results-heading">
+        <div class="topics-results__header">
+          <h2 id="topics-results-heading" class="topics-results__heading">Đề tài nghiên cứu</h2>
+          <p class="topics-results__summary">
+            Chọn đề tài để xem kiến thức nền và giảng viên hướng dẫn.
+          </p>
+        </div>
+
+        <div class="topics-grid">
+          <article class="topic-card">
+            <header class="topic-card__header">
+              <span class="topic-card__group">An toàn thông tin</span>
+              <h3 class="topic-card__title">Phát hiện tấn công mạng bằng học sâu</h3>
+            </header>
+            <div class="topic-card__body">
+              <p class="topic-card__meta">
+                Giảng viên hướng dẫn:
+                <strong class="topic-card__lecturer">PGS.TS. Nguyễn Tấn Cầm</strong>
+              </p>
+              <p class="topic-card__meta topic-card__meta--secondary">
+                Email:
+                <a class="topic-card__email" href="mailto:camnt@uit.edu.vn">camnt@uit.edu.vn</a>
+              </p>
+            </div>
+            <footer class="topic-card__footer">
+              <a class="topic-card__link" href="./detail/index.html">
+                Xem chi tiết &amp; cây kiến thức
+              </a>
+            </footer>
+          </article>
+        </div>
+      </section>
+
+      <!-- Trạng thái rỗng cùng cấp với section kết quả, mặc định ẩn bằng thuộc tính hidden -->
+      <section class="topics-empty" aria-labelledby="topics-empty-heading" hidden>
+        <h2 id="topics-empty-heading" class="topics-empty__title">Không tìm thấy chủ đề phù hợp</h2>
+        <p class="topics-empty__desc">
+          Hiện không có đề tài nào khớp với từ khóa hoặc nhóm nghiên cứu đã chọn. Vui lòng thử lại với từ khóa khác hoặc
+          chọn xem tất cả nhóm nghiên cứu.
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer dùng chung cho các trang thuộc phạm vi Job 1 -->
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div class="site-footer__info">
+        <p class="site-footer__title">Website Định hướng Nghiên cứu Khoa học — IE104 (UIT)</p>
+        <p>Nguồn dữ liệu: 3 nhóm hướng nghiên cứu, 37 đề tài và 16 giảng viên hướng dẫn
+          (<code>data/research-data.json</code>).</p>
+      </div>
+      <nav aria-label="Liên kết nhanh trong phạm vi Job 1">
+        <ul class="site-footer__nav">
+          <li><a class="site-footer__link" href="./index.html" aria-current="page">Khám phá chủ đề</a></li>
+          <li><a class="site-footer__link" href="./detail/index.html">Chi tiết chủ đề mẫu (IDS)</a></li>
+          <li><a class="site-footer__link" href="../lecturers/index.html">Danh bạ giảng viên</a></li>
+          <li><a class="site-footer__link" href="../lecturers/detail/index.html">Hồ sơ giảng viên mẫu</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+</body>
+
+</html>

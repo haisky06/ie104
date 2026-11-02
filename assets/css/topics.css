@@ -1,0 +1,183 @@
+/* ==========================================================================
+   CSS Riêng Trang Khám Phá Chủ Đề (#page-topics) — Đồ án IE104 (UIT)
+   Phụ trách: TV1
+   Cảm hứng bố cục danh mục & thanh lọc gọn: https://roadmap.sh/roadmaps/
+   Quy tắc:
+   - Mọi selector bắt đầu bằng #page-topics để tránh xung đột với trang TV2/TV3
+   - Chỉ sử dụng Design Tokens var(--*) từ assets/css/style.css
+   - Chia cột bằng Flexbox/CSS Grid và Media Queries thuần (Mobile / Tablet / Desktop)
+   ========================================================================== */
+
+/* 1. Khung bố cục dọc chính của trang Khám phá */
+#page-topics .topics-main > .container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* 2. Khu vực tiêu đề đầu trang (.topics-hero) — Gọn gàng để sớm thấy đề tài trên Mobile */
+#page-topics .topics-hero {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+#page-topics .topics-hero__title {
+  letter-spacing: -0.01em;
+}
+
+#page-topics .topics-hero__desc {
+  max-width: 72ch;
+  color: var(--color-muted);
+  font-size: 0.9375rem;
+}
+
+/* 3. Cụm tìm kiếm và lọc nhóm (.topics-filter) */
+#page-topics .topics-filter {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+}
+
+#page-topics .topics-filter__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+#page-topics .topics-filter__field {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+#page-topics .topics-filter__note {
+  color: var(--color-muted);
+  font-size: 0.875rem;
+}
+
+/* 4. Khu vực kết quả và lưới thẻ đề tài (.topics-results, .topics-grid) */
+#page-topics .topics-results {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+#page-topics .topics-results__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: flex-start;
+  gap: var(--space-1) var(--space-3);
+}
+
+#page-topics .topics-results__summary {
+  color: var(--color-muted);
+  font-size: 0.9375rem;
+}
+
+/* Mặc định Mobile (< 768px): 1 cột */
+#page-topics .topics-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-4);
+}
+
+/* 5. Khu vực trạng thái rỗng (.topics-empty) — Mặc định ẩn bằng thuộc tính [hidden] */
+#page-topics .topics-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  max-width: 40rem;
+  padding: var(--space-5);
+  background-color: var(--color-surface);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-card);
+}
+
+#page-topics .topics-empty__desc {
+  color: var(--color-muted);
+  font-size: 0.9375rem;
+}
+
+/* 6. Responsive Media Queries theo chuẩn môn học IE104 */
+
+/* Mobile: tối đa 767px */
+@media (max-width: 767px) {
+  #page-topics .topics-main {
+    padding-block: var(--space-3) var(--space-5);
+  }
+
+  #page-topics .topics-main > .container {
+    gap: var(--space-3);
+  }
+
+  #page-topics .topics-filter {
+    padding: var(--space-3);
+  }
+}
+
+/* Tablet: từ 768px đến 1023px — Thanh lọc nằm ngang, lưới mở rộng 2 cột */
+@media (min-width: 768px) and (max-width: 1023px) {
+  #page-topics .topics-filter__form {
+    flex-direction: row;
+    align-items: flex-end;
+    gap: var(--space-3);
+  }
+
+  #page-topics .topics-filter__field--search {
+    flex: 3 1 16rem;
+  }
+
+  #page-topics .topics-filter__field--group {
+    flex: 2 1 13rem;
+  }
+
+  #page-topics .topics-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+  }
+
+  /* Khi chỉ có 1 thẻ mẫu (Mốc A), giữ chiều rộng cân đối với nội dung thật */
+  #page-topics .topics-grid > .topic-card:only-child {
+    grid-column: 1 / -1;
+    max-width: 35rem;
+  }
+}
+
+/* Desktop: từ 1024px trở lên — Thanh lọc nằm cùng hàng, lưới mở rộng 3 cột */
+@media (min-width: 1024px) {
+  #page-topics .topics-filter {
+    padding: var(--space-4);
+  }
+
+  #page-topics .topics-filter__form {
+    flex-direction: row;
+    align-items: flex-end;
+    gap: var(--space-4);
+  }
+
+  #page-topics .topics-filter__field--search {
+    flex: 2 1 20rem;
+  }
+
+  #page-topics .topics-filter__field--group {
+    flex: 1 1 15rem;
+  }
+
+  #page-topics .topics-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-5);
+  }
+
+  /* Khi chỉ có 1 thẻ mẫu (Mốc A), giới hạn độ rộng 35rem (560px) để dễ quét mắt */
+  #page-topics .topics-grid > .topic-card:only-child {
+    grid-column: 1 / -1;
+    max-width: 35rem;
+  }
+}

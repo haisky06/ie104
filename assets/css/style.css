@@ -1,0 +1,438 @@
+/* ==========================================================================
+   CSS Nền Dùng Chung (Shared Design System) — Đồ án IE104 (UIT)
+   Phụ trách: TV1
+   Phối màu: Light mode Graphite & Dark mode Xám than (Bản 01)
+   Bao gồm:
+   - Hệ thống Design Tokens theo hợp đồng (màu sáng/tối, font, spacing, radius, container)
+   - Kiểu chữ cơ bản, link/button, form control cơ bản và dấu hiệu focus bàn phím
+   - Khung .container, .site-header, .site-nav, .site-footer, .topic-card
+   Lưu ý: Không đặt selector ép bố cục lên section/form chung để tránh ảnh hưởng TV2/TV3.
+   ========================================================================== */
+
+/* 1. Khai báo Design Tokens mặc định (Theme Sáng - Light Mode Graphite) */
+:root {
+  /* Bảng màu sáng Graphite — tương phản chữ thường, nút và liên kết đạt > 5.7:1 */
+  --color-bg: #F5F8FA;
+  --color-surface: #FFFFFF;
+  --color-text: #1B252B;
+  --color-muted: #4E606A;
+  --color-border: #CBD8DF;
+  --color-primary: #A9DCFA;
+  --color-on-primary: #103950;
+  --color-focus: #176589;
+  --color-link: #155B83;
+  --color-primary-hover: #94CEEF;
+
+  /* Font chữ hệ thống hỗ trợ đầy đủ tiếng Việt kèm fallback */
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --font-heading: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+
+  /* Thang khoảng cách chuẩn */
+  --space-1: 0.25rem; /* 4px */
+  --space-2: 0.5rem;  /* 8px */
+  --space-3: 0.75rem; /* 12px */
+  --space-4: 1rem;    /* 16px */
+  --space-5: 1.5rem;  /* 24px */
+  --space-6: 2rem;    /* 32px */
+
+  /* Bo góc và độ rộng tối đa của khung nội dung */
+  --radius-card: 0.5rem;
+  --container-max: 1200px;
+}
+
+/* 2. Ghi đè bảng màu khi trình duyệt/hệ điều hành ở chế độ tối (Dark Mode Xám than) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Bảng màu tối Xám than — tương phản chữ thường, nút và liên kết đạt > 6.3:1 */
+    --color-bg: #1B1C1E;
+    --color-surface: #292B2F;
+    --color-text: #F2F3F5;
+    --color-muted: #BCC1C8;
+    --color-border: #43474D;
+    --color-primary: #275EA8;
+    --color-on-primary: #FFFFFF;
+    --color-focus: #9FCCFF;
+    --color-link: #A9D2FF;
+    --color-primary-hover: #204E8B;
+  }
+}
+
+/* 3. Nền tảng trang & Typography chung */
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+main {
+  flex: 1;
+  padding-block: var(--space-4) var(--space-6);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  color: var(--color-text);
+  line-height: 1.3;
+  overflow-wrap: break-word;
+}
+
+h1 {
+  font-size: clamp(1.375rem, 2vw + 0.95rem, 2rem);
+  font-weight: 700;
+}
+
+h2 {
+  font-size: clamp(1.125rem, 1.2vw + 0.85rem, 1.375rem);
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 1.1875rem;
+  font-weight: 700;
+}
+
+p {
+  overflow-wrap: break-word;
+}
+
+/* 4. Liên kết, nút bấm và dấu hiệu Focus bàn phím */
+a {
+  color: var(--color-link);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+a:focus,
+a:focus-visible,
+button:focus,
+button:focus-visible,
+input:focus,
+input:focus-visible,
+select:focus,
+select:focus-visible,
+textarea:focus,
+textarea:focus-visible,
+summary:focus,
+summary:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-card);
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn:hover,
+.btn:active {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+  color: var(--color-on-primary);
+  text-decoration: none;
+}
+
+.btn--outline {
+  border-color: var(--color-link);
+  background-color: transparent;
+  color: var(--color-link);
+}
+
+.btn--outline:hover,
+.btn--outline:active {
+  background-color: var(--color-bg);
+  border-color: var(--color-link);
+  color: var(--color-link);
+}
+
+/* Kiểu cơ bản cho form control dùng chung */
+label {
+  display: inline-block;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: var(--space-1);
+}
+
+input[type="search"],
+input[type="text"],
+select {
+  width: 100%;
+  max-width: 100%;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  font-size: 0.9375rem;
+  line-height: 1.4;
+}
+
+input::placeholder {
+  color: var(--color-muted);
+  opacity: 1;
+}
+
+input:disabled,
+select:disabled,
+button:disabled {
+  background-color: var(--color-bg);
+  color: var(--color-muted);
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+/* 5. Khung giới hạn chiều rộng (.container) */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+}
+
+/* 6. Header và điều hướng chính (.site-header, .site-nav) */
+.site-header {
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding-block: var(--space-2);
+}
+
+.site-header__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-4);
+}
+
+.site-header__brand {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.site-header__title {
+  font-family: var(--font-heading);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+}
+
+.site-nav__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  list-style: none;
+  padding: 0;
+}
+
+.site-nav__item {
+  display: flex;
+}
+
+.site-nav__link {
+  display: inline-block;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-card);
+  border: 1px solid transparent;
+  color: var(--color-text);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.site-nav__link:hover {
+  background-color: var(--color-bg);
+  border-color: var(--color-border);
+  color: var(--color-link);
+  text-decoration: none;
+}
+
+.site-nav__link[aria-current="page"],
+.site-nav__link--active {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-on-primary);
+  font-weight: 700;
+}
+
+.site-nav__link[aria-current="page"]:hover,
+.site-nav__link[aria-current="page"]:active,
+.site-nav__link--active:hover,
+.site-nav__link--active:active {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+  color: var(--color-on-primary);
+}
+
+/* 7. Thẻ chủ đề dùng chung (.topic-card)
+   Thứ tự ưu tiên thị giác: Nhóm nghiên cứu -> Tên đề tài -> Giảng viên -> Link xem chi tiết */
+.topic-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+}
+
+.topic-card__header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+.topic-card__group {
+  display: inline-block;
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background-color: var(--color-bg);
+  color: var(--color-link);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.topic-card__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--color-text);
+  overflow-wrap: break-word;
+}
+
+.topic-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding-top: var(--space-1);
+}
+
+.topic-card__meta {
+  color: var(--color-muted);
+  font-size: 0.9375rem;
+  overflow-wrap: break-word;
+}
+
+.topic-card__lecturer {
+  color: var(--color-text);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.topic-card__meta--secondary {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+}
+
+.topic-card__email {
+  color: var(--color-muted);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  overflow-wrap: anywhere;
+}
+
+.topic-card__email:hover {
+  color: var(--color-link);
+}
+
+.topic-card__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border);
+}
+
+.topic-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  color: var(--color-link);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.topic-card__status {
+  color: var(--color-muted);
+  font-size: 0.875rem;
+  font-style: italic;
+}
+
+/* 8. Footer dùng chung (.site-footer) */
+.site-footer {
+  margin-top: auto;
+  padding-block: var(--space-4);
+  background-color: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  color: var(--color-muted);
+  font-size: 0.875rem;
+}
+
+.site-footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3) var(--space-5);
+}
+
+.site-footer__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  max-width: 65ch;
+}
+
+.site-footer__title {
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+.site-footer__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  list-style: none;
+  padding: 0;
+}
+
+.site-footer__link {
+  color: var(--color-link);
+  font-weight: 500;
+}
